@@ -15,6 +15,11 @@ benchmark of prefill-heavy vs decode-heavy workloads with prefix caching on and 
 > Built for the TPU Sprint on a `ct6e-standard-4t` Flex-start VM (europe-west4-a), using one of
 > its four v6e chips. vLLM-TorchTPU 0.33.0, libtpu 0.0.50, Python 3.12.
 
+![DocIntel extracting a scanned invoice into schema-valid JSON on a TPU v6e](docs/extraction.png)
+
+*A scanned, image-only invoice → Gemma OCR on TPU (2.8 s) → schema-valid JSON with every
+arithmetic check passing (4.4 s).*
+
 ---
 
 ## Results at a glance
@@ -66,8 +71,8 @@ this, as expected.
 
 | Step | Time |
 |---|---|
-| OCR of a scanned invoice page (Gemma vision) | 3.3 s (23 s on the first, compiling call) |
-| Invoice → schema-valid JSON (682 prompt + 433 output tokens) | 5.1 s |
+| OCR of a scanned invoice page (Gemma vision) | 2.8–3.3 s (23 s on the first, compiling call) |
+| Invoice → schema-valid JSON (682 prompt + 433 output tokens) | 4.4 s with compact JSON (5.1 s before) |
 | Cited answer over retrieved passages | 0.27 s |
 
 ### Serving facts from the logs
